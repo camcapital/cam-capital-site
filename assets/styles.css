@@ -2,14 +2,19 @@
    Mobile-first. No build step. */
 
 :root {
-  --bg: #f6f5f1;
+  /* Palette is built around the logo blue (#38b6ff, camcapital/brand cam-capital/logo).
+     Neutrals are cool, navy-tinted so they sit with the blue instead of against it. */
+  --brand: #38b6ff;        /* logo blue. Fill behind --ink (8.1:1) or on --dark (8.1:1); never text on light */
+  --brand-strong: #0b6bab; /* text-safe blue: 5.3:1 on --bg, 5.7:1 on --surface */
+  --brand-tint: #e3f3fd;   /* soft blue wash for hovers */
+  --bg: #f5f8fb;
   --surface: #ffffff;
-  --ink: #0b0b0c;
-  --muted: #55555b;      /* 6.6:1 on --bg */
-  --line: #dddbd3;
-  --accent: #ffd23f;     /* used as a fill behind dark text, never as text on light */
-  --dark: #0b0b0c;
-  --dark-muted: #a9a9b0; /* 8.4:1 on --dark */
+  --ink: #0a1622;
+  --muted: #4a5763;        /* 7.0:1 on --bg */
+  --line: #dbe3ea;
+  --accent: var(--brand);
+  --dark: #0a1622;
+  --dark-muted: #9fb0bf;   /* 8.2:1 on --dark */
 
   --font: "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --container: 1320px;
@@ -72,7 +77,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .eyebrow::before {
   content: ""; width: 8px; height: 8px; border-radius: 50%;
-  background: var(--ink);
+  background: var(--brand);
 }
 
 /* ---------- Header ---------- */
@@ -95,20 +100,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 
 .logo {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-weight: 700; font-size: 1.125rem; letter-spacing: -.02em;
+  display: inline-flex; align-items: center;
   text-decoration: none;
 }
-.logo-mark {
-  width: 22px; height: 22px; border-radius: 6px;
-  background: var(--ink);
-  position: relative;
-}
-.logo-mark::after {
-  content: ""; position: absolute; right: -4px; top: -4px;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--accent); border: 2px solid var(--bg);
-}
+/* Logo SVG has an 252:88 viewBox; height drives the size */
+.logo img { height: 40px; width: auto; }
+@media (min-width: 900px) { .logo img { height: 48px; } }
 
 .nav-list { display: flex; align-items: center; gap: 4px; }
 .nav-list a {
@@ -117,7 +114,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   border-radius: 999px;
   transition: background-color .2s;
 }
-.nav-list a:hover { background: rgba(11, 11, 12, .06); }
+.nav-list a:hover { background: var(--brand-tint); }
 
 /* ---------- Hero ---------- */
 
@@ -322,7 +319,7 @@ section { scroll-margin-top: 72px; }
 .product-desc { color: var(--muted); }
 .product-cta {
   display: inline-flex; gap: 6px; align-items: center;
-  font-weight: 600; margin-top: 4px;
+  font-weight: 600; margin-top: 4px; color: var(--brand-strong);
   text-decoration: underline; text-decoration-color: transparent;
   text-underline-offset: 4px; text-decoration-thickness: 2px;
   transition: text-decoration-color .2s;
@@ -348,14 +345,15 @@ section { scroll-margin-top: 72px; }
   background: var(--dark); color: #fff;
   padding: clamp(64px, 9vw, 112px) 0 32px;
 }
-.site-footer :focus-visible { outline-color: #fff; }
+.site-footer :focus-visible { outline-color: var(--brand); }
 .footer-grid { display: grid; gap: 40px; }
-.footer-logo { font-size: 1.75rem; font-weight: 700; letter-spacing: -.03em; }
+.footer-logo img { height: 72px; width: auto; }
+@media (min-width: 900px) { .footer-logo img { height: 96px; } }
 .footer-tag { color: var(--dark-muted); margin-top: 8px; max-width: 22rem; }
 .footer-bottom {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
   margin-top: clamp(56px, 8vw, 96px); padding-top: 24px;
-  border-top: 1px solid #26262a;
+  border-top: 1px solid #1d2b3a;
   color: var(--dark-muted); font-size: .9375rem;
 }
 .footer-bottom a { text-decoration: none; }
