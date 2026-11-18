@@ -123,7 +123,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   padding: 136px 0 clamp(48px, 8vw, 96px);
 }
 @media (min-width: 900px) {
-  .hero { min-height: 100svh; padding-top: 120px; }
+  /* Fill the first screen on laptops, but cap it so tall windows don't get a blank band above the headline */
+  .hero { min-height: min(100svh, 920px); padding-top: 120px; }
 }
 
 .hero-title {
